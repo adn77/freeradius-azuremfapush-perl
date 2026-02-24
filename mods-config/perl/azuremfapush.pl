@@ -49,10 +49,16 @@ sub update_token {
 		scope => $scope,
 		grant_type => $grant_type
 	} );
-	die "Error: unhandled HTTP/$res->{status}" unless $res->{success};
+
+	unless ( $res->{success} ){
+		&radiusd::radlog(L_ERR, "unhandled HTTP/$res->{status}");
+		&radiusd::radlog(L_ERR, $res->{content});
+		return RLM_MODULE_FAIL;
+	}
 
 	return $1 if $res->{content} =~ /{.*"access_token":"([^"]+)".*}/;
-	die "Error: no token received\n $res->{content}";
+	&radiusd::radlog(L_ERR, "Error: no token received\n $res->{content}");
+	return RLM_MODULE_FAIL;
 }
 
 sub authenticate {
