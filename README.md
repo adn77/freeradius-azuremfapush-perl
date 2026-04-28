@@ -4,7 +4,7 @@ This tries to replicate the functionality of the [NPS MFA extension](https://lea
 
 ## Configuration ##
 
-There is a genral MS MFA CLientID. In order to use that with application permissions, a password must be created on the Service Principal within your directory.
+There is a specific MS MFA CLientID provided by MS. In order to use that with application permissions, a password must be created on the Service Principal within your directory.
 The easiest way to do this is unfortunately Powershell. If you're an O365 admin, you will have it installed already:
 
 ````
